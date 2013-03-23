@@ -1,74 +1,12 @@
 ---
-title: bom bom bom
+layout: default
 ---
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
-<html lang="en">
-    <head>
-        <title>bom bom bom</title>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <meta name="description" content="My personal website."/>
-        <meta name="author" content="Alex Michael"/>
-        <meta name="viewport" content="width=device-width,initial-scale=1"/>
-        <meta name="google-site-verification" content="fjjteSrnjR5Ad2S5S5KAWokSz_s3sHyS_6KgIxbsR0E" />
-        <meta name="google-site-verification" content="uTOU4fu1RspbwG4_2ZCE9WHWFujHG8R8O1lnLLB3Tt0" />
-        <link rel="stylesheet" href="css/styles.css"/>
-        <script type="text/javascript" src="//use.typekit.net/lyg1ini.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    </head>
-    <body>
-        {% include ga.html %}
-        <!--
-                    ___                 ___                ___
-                 (   )               (   )              (   )
-          .--.    | | .-.             | |.-.     .---.   | |.-.    ___  ___
-         /    \   | |/   \            | /   \   / .-, \  | /   \  (   )(   )
-        |  .-. ;  |  .-. .            |  .-. | (__) ; |  |  .-. |  | |  | |
-        | |  | |  | |  | |            | |  | |   .'`  |  | |  | |  | |  | |
-        | |  | |  | |  | |            | |  | |  / .'| |  | |  | |  | '  | |
-        | |  | |  | |  | |            | |  | | | /  | |  | |  | |  '  `-' |
-        | '  | |  | |  | |   ,-.      | '  | | ; |  ; |  | '  | |   `.__. |
-        '  `-' /  | |  | |  (   \     ' `-' ;  ' `-'  |  ' `-' ;    ___ | |
-         `.__.'  (___)(___)  `.__)     `.__.   `.__.'_.   `.__.    (   )' |
-                                                                    ; `-' '
-        -->
-        <div id="content">
-            <div id="pic">
-                <img src="/images/alex.jpg"/>
-            </div>
-            <div id="intro">
-                <h1>Hello, I am Alex.</h1>
-                <p>I code and obsess on creating stuff that people actually enjoy. It's all in the details after all.</p>
-                <p>I try to reply to all emails – if you want to chat, ping me at hi AT alexmic DOT net.</p>
-            </div>
-            <div id="more" class="clearfix">
-                <a target="_blank" href="http://breakitbetter.com">Break it better labs</a>
-                <span class='middot'>&middot;</span>
-                <a target="_blank" href="https://github.com/alexmic">Github</a>
-                <span class='middot'>&middot;</span>
-                <a target="_blank" href="https://twitter.com/alexismic">Twitter</a>
-                <span class='middot'>&middot;</span>
-                <a target="_blank" href="http://www.linkedin.com/in/alexandrosmichael">LinkedIn</a>
-                <span class='middot'>&middot;</span>
-                <a target="_blank" href="https://www.facebook.com/i.am.alex.mic">Facebook</a>
-                <span class='middot'>&middot;</span>
-                <a target="_blank" href="http://averagebrain.com" style="margin-right:0">Tumblr</a>
-            </div>
-            <div id="line">
-                <span class="c" style="background-color:#C75233"></span>
-                <span class="c" style="background-color:#C78933"></span>
-                <span class="c" style="background-color:#D6CEAA"></span>
-                <span class="c" style="background-color:#79B5AC"></span>
-                <span class="c" style="background-color:#5E2F46"></span>
-            </div>
-        </div>
-        <canvas id="canvas"></canvas>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/javascripts/jquery.min.js"><\/script>')</script>
-        <script src="/javascripts/all.js"></script>
-    </body>
-</html>
+{% for post in site.posts limit:3 %}
+  {% assign page = post %}
+  {% assign content = post.content %}
+  {% include post.html %}
+  <div class="sep">&nbsp;</div>
+{% endfor %}
+<div id="full-archive">
+    <a href="/archive/">View the full archive &rarr;</a>
+</div>

@@ -1,0 +1,57 @@
+/**
+ * Left sidebar
+ */
+header#spine {
+    .clearfix;
+    background: @text;
+    color: @non;
+    padding: 15px;
+
+    h4 {
+        display: none;
+    }
+
+    /**
+     * Greeting
+     */
+    h1#hey {
+        font-size: 1em;
+        line-height: 1;
+        text-transform: uppercase;
+        margin: 0;
+        font-weight: 900;
+
+        a {
+            display: block;
+            border: none;
+            padding: 0 15px;
+            color: #ffffff;
+            font-weight: 900;
+            border-left: 10px solid #efefef;
+            &:hover {
+                border-left-color: @link;
+            }
+        }
+    }
+
+    /**
+     * Social profiles
+     */
+    div#profiles a, span {
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.75em;
+        border: none;
+        &:hover {
+            color: @link;
+        }
+    }
+
+    /**
+     * Hide all blocks and show depending on size
+     */
+    p.description, div#recent, div#profiles {
+        display: none;
+    }
+}

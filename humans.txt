@@ -8,7 +8,5 @@ Twitter: @alexismic
 Github: http://github.com/alexmic
 
 /* SITE */
-Standards: HTML5, CSS3
-Components: jQuery, love.
-Software: jekyll, github pages, sublime text 2.
+Software: jekyll, github pages.
 Hardware: mac air.
