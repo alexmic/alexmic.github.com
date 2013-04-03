@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'How to win your next hackathon: 8 top tips.'
+draft: false
 ---
 
 <h2>We won this Fall's AngelHack London and we'd like to share our experience with you.</h2>

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Hack Cyprus 2012: A tale of hacking in Cyprus.'
+draft: false
 ---
 
 <h2>Hack Cyprus 2012 was the first ever hackathon in Cyprus. Here are some lessons learned from organizing it.</h2>
