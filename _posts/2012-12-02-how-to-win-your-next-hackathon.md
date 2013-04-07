@@ -1,10 +1,9 @@
 ---
 layout: post
-title: 'How to win your next hackathon: 8 top tips.'
-draft: false
+title: "How to win your next hackathon: 8 top tips."
+tldr: "We won this Fall's AngelHack London and we'd like to share our experience with you."
+published: true
 ---
-
-<h2>We won this Fall's AngelHack London and we'd like to share our experience with you.</h2>
 
 On the weekend of 10-11th of November, we took part in the first ever <a href="http://angelhack.com" target="_blank">AngelHack London</a>. For those who haven't heard of it, AngelHack claims to be the world's biggest hackathon and holds events from San Francisco to Tel Aviv.
 
