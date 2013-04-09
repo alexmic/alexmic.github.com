@@ -2,7 +2,7 @@
 layout: post
 title: "Approach: Building a toy template engine in Python."
 tldr: "Let's build a simplistic template engine and explore how it works under the hood – in case you were ever wondering."
-published: true
+published: false
 ---
 
 ### Language design
