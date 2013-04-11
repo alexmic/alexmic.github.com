@@ -283,7 +283,10 @@ def resolve(name, context):
 
 I hope this academic exercise gave you a taste of how the internals of a templating engine
 might work. This is far and away from production quality but it can serve as the
-basis of better things. You can find the full code on [Github](https://github.com/alexmic/microtemplates).
+basis of better things.
+
+You can find the full code on [Github](https://github.com/alexmic/microtemplates), and
+you can discuss this further on <a class="hn" target="_blank" href="https://news.ycombinator.com/item?id=5535040">Hacker News</a>.
 
 *Huge thanks* to Nassos Hadjipapas, Alex Loizou, Panagiotis Papageorgiou and Gearoid
 O'Rourke for reviewing.
