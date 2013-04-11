@@ -2,8 +2,10 @@
 layout: post
 title: "Approach: Building a toy template engine in Python."
 tldr: "Let's build a simplistic template engine and explore how it works under the hood – in case you were ever wondering."
-published: false
+published: true
 ---
+
+If you wish to dive straight into the code, then [Github](https://github.com/alexmic/microtemplates) is your friend.
 
 ### Language design
 
@@ -17,17 +19,16 @@ Our language is pretty basic. We will have two types of tags, *variables* and *b
 <!-- blocks are surrounded by `{%` and `%}` -->
 {% each items %}
     <div>{{it}}</div>
-{% endeach %}
+{% end %}
 {% endraw %}
 {% endhighlight %}
 
-Most blocks need to be *closed* as in the example. The closing tag should include
-the word 'end' and the *block command* with no spaces. As you've probably muttered
-already, our language is heavily inspired by the Django template markup.
+Most blocks need to be *closed* as in the example and the closing tag is just the
+word *end*.
 
 Our template engine will be able to handle basic loops and conditionals. We will
 also add support for callables in blocks – personally, I find it handy being
-able to call arbitrary Python functions in your templates.
+able to call arbitrary Python functions in my templates.
 
 #### Loops
 
@@ -37,21 +38,21 @@ Loops allow for iterations over collections or iterable objects.
 {% raw %}
 {% each people %}
     <div>{{it.name}}</div>
-{% endeach %}
+{% end %}
 
 {% each [1, 2, 3] %}
     <div>{{it}}</div>
-{% endeach %}
+{% end %}
 
 {% each records %}
     <div>{{..name}}</div>
-{% endeach %}
+{% end %}
 {% endraw %}
 {% endhighlight %}
 
-In the example above, *people* is the collection and *it* references the current
-item in the iteration. Dotted paths in variables will resolve to nested dictionary
-attributes. Using *'..'* we can access variables in the parent context.
+In the example above, *people* is the collection and *it* refers to the current
+item in the iteration. Dotted paths in names will resolve to nested dictionary
+attributes. Using *'..'* we can access names in the parent context.
 
 #### Conditionals
 
@@ -64,7 +65,7 @@ and the following operators: *==, <=, >=, !=, is, >, <*.
     <div>more than 5</div>
 {% else %}
     <div>less than or equal to 5</div>
-{% endif %}
+{% end %}
 {% endraw %}
 {% endhighlight %}
 
@@ -110,14 +111,12 @@ VAR_TOKEN_START = '{{'
 VAR_TOKEN_END = '}}'
 BLOCK_TOKEN_START = '{%'
 BLOCK_TOKEN_END = '%}'
-
-TOK_REGEX = "(%s.*?%s|%s.*?%s)" % (
+TOK_REGEX = re.compile(r"(%s.*?%s|%s.*?%s)" % (
     VAR_TOKEN_START,
     VAR_TOKEN_END,
     BLOCK_TOKEN_START,
     BLOCK_TOKEN_END
-)
-COMPILED_TOK_REGEX = re.compile(TOK_REGEX)
+))
 {% endraw %}
 {% endhighlight %}
 
@@ -133,7 +132,7 @@ The following example shows our regular expression in action:
 
 {% highlight python %}
 {% raw %}
->>> COMPILED_TOK_REGEX.split('{% each vars %}<i>{{it}}</i>{% endeach %}')
+>>> TOK_REGEX.split('{% each vars %}<i>{{it}}</i>{% endeach %}')
 ['{% each vars %}', '<i>', '{{it}}', '</i>', '{% endeach %}']
 {% endraw %}
 {% endhighlight %}
@@ -160,6 +159,12 @@ should provide implementations for *process_fragment()* and *render()*.
 necessary attributes on the *Node* object. *render()* is responsible for converting
 the node to HTML using the provided context.
 
+A subclass could optionally implement *enter_scope()* and *exit_scope()* which
+are hooks that get called by the compiler during compilation and should perform
+further initialization and cleanup. *enter_scope()* is called when the node
+creates a new scope (more on this later), and *exit_scope()* is called when the node's
+scope is about to get popped off the scope stack.
+
 This is our base *Node* class:
 
 {% highlight python %}
@@ -172,7 +177,13 @@ class _Node(object):
     def process_fragment(self, fragment):
         pass
 
+    def enter_scope(self):
+        pass
+
     def render(self, context):
+        pass
+
+    def exit_scope(self):
         pass
 
     def render_children(self, context, children=None):
@@ -184,7 +195,7 @@ class _Node(object):
         return ''.join(map(render_child, children))
 {% endhighlight %}
 
-And this is a *Variable* node:
+As an example of a concrete subclass, this is a *Variable* node:
 
 {% highlight python %}
 class _Variable(_Node):
@@ -217,9 +228,10 @@ def compile(self):
     scope_stack = [root]
     for fragment in self.each_fragment():
         if not scope_stack:
-            raise Exception('nesting issues')
+            raise TemplateError('nesting issues')
         parent_scope = scope_stack[-1]
         if fragment.type == CLOSE_BLOCK_FRAGMENT:
+            parent_scope.exit_scope()
             scope_stack.pop()
             continue
         new_node = self.create_node(fragment)
@@ -227,6 +239,7 @@ def compile(self):
             parent_scope.children.append(new_node)
             if new_node.creates_scope:
                 scope_stack.append(new_node)
+                new_node.enter_scope()
     return root
 {% endhighlight %}
 
@@ -235,29 +248,42 @@ def compile(self):
 The last step in the pipeline is to render the AST to HTML. We visit all the
 nodes in the AST and call *render()* passing as a parameter the context given
 to the template. During rendering we will need to deduce whether we are dealing
-with literals or context variables that need to be resolved. For this, we will use
+with literals or context variable names that need to be resolved. For this, we will use
 [ast.literal_eval()](http://docs.python.org/2/library/ast.html#ast.literal%5Feval) which
-can safely evaluate strings containing Python code. Here's our resolving function:
+can safely evaluate strings containing Python code:
 
 {% highlight python %}
-def resolve_in_context(name, context):
+def eval_expression(expr):
     try:
-        return ast.literal_eval(name)
+        return 'literal', ast.literal_eval(expr)
     except ValueError, SyntaxError:
-        if name.startswith('..'):
-            context = context.get('..', {})
-            name = name[2:]
-        if name in context:
-            return context[name]
-        else:
-            raise TemplateContextError("cannot resolve '%s'" % name)
+        return 'name', expr
 {% endhighlight %}
 
-If *name* cannot be evaluated as a literal then we assume it is a context variable and
-seek its value in the context.
+If we are dealing with a context variable name instead of a literal then we need
+to resolve it by searching for its value in the context. We need to take care of dotted names
+and names that reference the parent context. Here's our resolving function which is
+the final piece of the puzzle:
+
+{% highlight python %}
+def resolve(name, context):
+    if name.startswith('..'):
+        context = context.get('..', {})
+        name = name[2:]
+    try:
+        for tok in name.split('.'):
+            context = context[tok]
+        return context
+    except KeyError:
+        raise TemplateContextError(name)
+{% endhighlight %}
+
 
 ### Conclusion
 
 I hope this academic exercise gave you a taste of how the internals of a templating engine
 might work. This is far and away from production quality but it can serve as the
-basis of better things. You can find the full code on Github.
+basis of better things. You can find the full code on [Github](https://github.com/alexmic/microtemplates).
+
+*Huge thanks* to Nassos Hadjipapas, Alex Loizou, Panagiotis Papageorgiou and Gearoid
+O'Rourke for reviewing.
