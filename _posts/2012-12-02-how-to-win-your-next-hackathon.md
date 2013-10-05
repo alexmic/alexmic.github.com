@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to win your next hackathon: 8 top tips."
+title: "How to win your next hackathon: 8 top tips"
 tldr: "We won this Fall's AngelHack London and we'd like to share our experience with you."
 published: true
 ---

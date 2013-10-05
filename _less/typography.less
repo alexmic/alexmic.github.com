@@ -9,6 +9,17 @@ html, body {
     font-size: 18px;
 }
 
+blockquote {
+    padding-left: 10px;
+    border-left: 4px solid @rule;
+    color: lighten(@text, 20%);
+    p, a {
+        font-style: italic;
+    }
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+}
+
 h1 {
     font-size: 2em;
     font-weight: 700;
@@ -29,7 +40,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.25em;
+    font-size: 1.125em;
     font-weight: 700;
     -webkit-font-smoothing: antialiased;
 }
@@ -52,10 +63,14 @@ a {
 
 em {
     font-style: italic;
-    font-weight: 500;
     a {
         font-style: italic;
     }
+}
+
+strong {
+    font-style: italic;
+    font-weight: 700;
 }
 
 p {
