@@ -33,9 +33,17 @@ header {
         position: relative;
         border: none;
         padding-bottom: 0;
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-image: url(/images/facesprite.jpg);
+        background-position: 0px 0px;
+        .border-radius(120px);
+        position: relative;
+        margin: 0 auto;
 
-        img {
-            .border-radius(120px);
+        &:hover {
+            background-position: 0px -100px;
         }
     }
 
@@ -47,7 +55,15 @@ header {
         text-transform: uppercase;
         letter-spacing: 1.1px;
         margin-bottom: 0.25em;
-        font-weight: 700;
+
+        a {
+            color: @text;
+            font-weight: 700;
+            border: none;
+            &:hover {
+                border: none;
+            }
+        }
     }
 
     h3 {
