@@ -7,7 +7,7 @@ published: true
 
 <a href="http://projecteuler.net/problem=79">Problem 79</a> is an interesting problem which actually uncovers how easy it is for someone to recover the passcode of a user using a keylogger.
 
-The problem is phrased is as follows:
+The problem is phrased as follows:
 
 > A common security method used for online banking is to ask the user for three
 > random characters from a passcode. For example, if the passcode was 531278,
