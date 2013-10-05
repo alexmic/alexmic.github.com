@@ -12,10 +12,32 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
   </head>
   <body>
-    {% include spine.html%}
-    <section id="content">
+    <div class="container">
+      <header>
+        <a href="/" class="face">
+          <img src="/images/alex3.jpg" />
+        </a>
+        <h1>Alex Michael</h1>
+        <h3>Engineer <a href="http://tictail.com">@tictail</a>, founder <a href="http://hackcyprus.com">@hackcyprus</a>.</h3>
+        <nav>
+          <a href="/about.html">Background</a>
+          <a href="https://github.com/alexmic">Code</a>
+          <a href="https://twitter.com/alexismic">Tweets</a>
+        </nav>
+        <p class="chasm">&nbsp;</p>
+      </header>
       {{content}}
-    </section>
-    {% include ga.html %}
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27806321-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    </div>
   </body>
 </html>

@@ -1,12 +1,16 @@
 ---
 layout: default
 ---
-{% for post in site.posts limit:3 %}
-  {% assign page = post %}
-  {% assign content = post.content %}
-  {% include post.html %}
-  <div class="sep">&nbsp;</div>
-{% endfor %}
-<div id="full-archive">
-    <a href="/archive/">View the full archive &rarr;</a>
-</div>
+
+<section id="home">
+    <ul>
+      {% for post in site.posts limit:5 %}
+        <li>
+          <h1>
+            <a href="{{post.url}}">{{post.title}}</a>
+            <div class="date">{{post.date | date: "%-d %B %Y"}}</div>
+          </h1>
+        </li>
+      {% endfor %}
+    </ul>
+</section>

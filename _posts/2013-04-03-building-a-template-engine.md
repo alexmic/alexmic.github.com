@@ -11,7 +11,7 @@ If you wish to dive straight into the code, then [Github](https://github.com/ale
 
 Our language is pretty basic. We will have two types of tags, *variables* and *blocks*.
 
-{% highlight html %}
+{% highlight html linenos=table %}
 {% raw %}
 <!-- variables are surrounded by `{{` and `}}` -->
 <div>{{my_var}}</div>
@@ -34,7 +34,7 @@ able to call arbitrary Python functions in my templates.
 
 Loops allow for iterations over collections or iterable objects.
 
-{% highlight html %}
+{% highlight html linenos=table %}
 {% raw %}
 {% each people %}
     <div>{{it.name}}</div>
@@ -59,7 +59,7 @@ attributes. Using *'..'* we can access names in the parent context.
 Conditionals need no explanation. Our language will support *if* and *else* constructs,
 and the following operators: *==, <=, >=, !=, is, >, <*.
 
-{% highlight html %}
+{% highlight html linenos=table %}
 {% raw %}
 {% if num > 5 %}
     <div>more than 5</div>
@@ -74,7 +74,7 @@ and the following operators: *==, <=, >=, !=, is, >, <*.
 Callables can be passed via the template context and get called with positional
 or keyword arguments in the template. Call blocks do not need to be closed.
 
-{% highlight html %}
+{% highlight html linenos=table %}
 {% raw %}
 <!-- supports positional arguments... -->
 <div class='date'>{% call prettify date_created %}</div>
@@ -105,7 +105,7 @@ fragment can either be arbitrary HTML or a tag. To split the contents we will
 use [regular expressions](http://docs.python.org/2/library/re.html) and the *split()*
 function.
 
-{% highlight python %}
+{% highlight python linenos=table %}
 {% raw %}
 VAR_TOKEN_START = '{{'
 VAR_TOKEN_END = '}}'
@@ -130,7 +130,7 @@ is a very nice explanation of how to control the greediness of regular expressio
 
 The following example shows our regular expression in action:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 {% raw %}
 >>> TOK_REGEX.split('{% each vars %}<i>{{it}}</i>{% endeach %}')
 ['{% each vars %}', '<i>', '{{it}}', '</i>', '{% endeach %}']
@@ -141,7 +141,7 @@ We will encapsulate each fragment of text in a *Fragment* object. This object
 will determine the fragment type and prepare the fragment for consumption by
 the compile function. Fragments can be one of four types:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 VAR_FRAGMENT = 0
 OPEN_BLOCK_FRAGMENT = 1
 CLOSE_BLOCK_FRAGMENT = 2
@@ -167,7 +167,7 @@ scope is about to get popped off the scope stack.
 
 This is our base *Node* class:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 class _Node(object):
     def __init__(self, fragment=None):
         self.children = []
@@ -197,7 +197,7 @@ class _Node(object):
 
 As an example of a concrete subclass, this is a *Variable* node:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 class _Variable(_Node):
     def process_fragment(self, fragment):
         self.name = fragment
@@ -210,7 +210,7 @@ In order to determine the node type (and hence instantiate the correct node clas
 fragment type and text. *Text* and *Variable* fragments directly translate to text nodes and variable nodes.
 *Block* fragments need a bit more processing – their type is denoted by the
 *block command* which is the first word in the fragment text. For example, the fragment:
-{% highlight python %}
+{% highlight python linenos=table %}
 {% raw %}
 {% each items %}
 {% endraw %}
@@ -222,7 +222,7 @@ scope and new nodes are added as children of that scope. Once we encounter a cor
 closing tag we close the scope, pop it off the scope stack and set the top of the stack
 as the new current scope.
 
-{% highlight python %}
+{% highlight python linenos=table %}
 def compile(self):
     root = _Root()
     scope_stack = [root]
@@ -252,7 +252,7 @@ with literals or context variable names that need to be resolved. For this, we w
 [ast.literal_eval()](http://docs.python.org/2/library/ast.html#ast.literal%5Feval) which
 can safely evaluate strings containing Python code:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 def eval_expression(expr):
     try:
         return 'literal', ast.literal_eval(expr)
@@ -265,7 +265,7 @@ to resolve it by searching for its value in the context. We need to take care of
 and names that reference the parent context. Here's our resolving function which is
 the final piece of the puzzle:
 
-{% highlight python %}
+{% highlight python linenos=table %}
 def resolve(name, context):
     if name.startswith('..'):
         context = context.get('..', {})
@@ -288,5 +288,4 @@ basis of better things.
 You can find the full code on [Github](https://github.com/alexmic/microtemplates), and
 you can discuss this further on <a class="hn" target="_blank" href="https://news.ycombinator.com/item?id=5535040">Hacker News</a>.
 
-*Huge thanks* to Nassos Hadjipapas, Alex Loizou, Panagiotis Papageorgiou and Gearoid
-O'Rourke for reviewing.
+*Huge thanks* to Nassos Hadjipapas, Alex Loizou, Panagiotis Papageorgiou and Gearoid O'Rourke for reviewing.
