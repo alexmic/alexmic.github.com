@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A solution to problem #79 on Project Euler"
-tldr: "A simple solution to problem #79 using graph theory and breath-first searching."
+tldr: "A solution to problem #79 using simple graph theory and breath-first searching."
 published: true
 ---
 
