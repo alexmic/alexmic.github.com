@@ -5,7 +5,7 @@ tldr: "A solution to problem #79 using simple graph theory and breath-first sear
 published: true
 ---
 
-<a href="http://projecteuler.net/problem=79">Problem 79</a> is an interesting problem which actually uncovers how easy it is for someone to recover the passcode of a user using a keylogger.
+[Problem 79](http://projecteuler.net/problem=79) is an interesting problem which actually uncovers how easy it is for someone to recover the passcode of a user using a keylogger.
 
 The problem is phrased as follows:
 
@@ -13,7 +13,7 @@ The problem is phrased as follows:
 > random characters from a passcode. For example, if the passcode was 531278,
 > they may ask for the 2nd, 3rd, and 5th characters; the expected reply would be: 317.
 >
-> The text file, <a href="http://projecteuler.net/project/keylog.txt">keylog.txt</a>, contains fifty successful login attempts.
+> The text file, [keylog.txt](http://projecteuler.net/project/keylog.txt), contains fifty successful login attempts.
 >
 > Given that the three characters are always asked for in order, analyse the
 > file so as to determine the shortest possible secret passcode of unknown     > length.
@@ -66,9 +66,9 @@ The last bit of the puzzle is to traverse this graph and find the shortest path 
 
 ### Breadth-first searching
 
-Breadth-first search is a method of traversing a graph by visiting the nodes in "breadth" than in "depth". That means, the algorithm traverses all the nodes of level N and then moves to the nodes of level N + 1. Typical implementations use a FIFO queue. Below is an animated image of the algorithm traversing a tree (source: <a href="http://en.wikipedia.org/wiki/Breadth-first_search">Wikipedia</a>).
+Breadth-first search is a method of traversing a graph by visiting the nodes in "breadth" than in "depth". That means, the algorithm traverses all the nodes of level N and then moves to the nodes of level N + 1. Typical implementations use a FIFO queue. Below is an animated image from [Wikipedia](http://en.wikipedia.org/wiki/Breadth-first_search) showing the algorithm traversing a tree.
 
-<img class="centered" src="http://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif"/>
+![BFS](http://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif)
 
 Our implementation follows a similar pattern and stops at the first match i.e returns the first path where the set difference with the number universe is empty:
 
@@ -87,7 +87,7 @@ def find_smallest_code(start, graph, number_universe):
 {% endraw %}
 {% endhighlight %}
 
-We now need to put everything together. Since we don't know a-priori which letter the passcode starts with, we need to run a search from each vertex and collect the results in a candidate list. The shortest code in that list is the answer:
+We now need to put everything together. Since we don't know a priori which letter the passcode starts with, we need to run a search from each vertex and collect the results in a candidate list. The shortest code in that list is the answer:
 
 {% highlight python linenos=table %}
 {% raw %}
@@ -102,4 +102,4 @@ def solve(keylog):
 {% endraw %}
 {% endhighlight %}
 
-Running the code on keylog.txt returns **73162890** which succesfully solves the problem on Project Euler.
+Running the code on keylog.txt returns **73162890** which succesfully solves the problem on Project Euler. You can find the full code in this <a href="https://gist.github.com/alexmic/6846774">gist.</a>

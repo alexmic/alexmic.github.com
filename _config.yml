@@ -1,4 +1,4 @@
-server: true
-auto: true
-permalink: /:title/
+safe: true
+lsi: false
 pygments: true
+permalink: /:title/
