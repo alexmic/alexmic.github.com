@@ -70,7 +70,7 @@ Breadth-first search is a method of traversing a graph by visiting the nodes in 
 
 ![BFS](http://upload.wikimedia.org/wikipedia/commons/4/46/Animated_BFS.gif)
 
-Our implementation follows a similar pattern and stops at the first match i.e returns the first path where the set difference with the number universe is empty:
+Our implementation follows a similar pattern and stops at the first match i.e returns the first path where the set difference with **M** is empty:
 
 {% highlight python linenos=table %}
 {% raw %}
