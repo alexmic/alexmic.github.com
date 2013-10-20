@@ -3,7 +3,7 @@
     font: @codeFonts;
     overflow: auto;
     font-size: 13px;
-    width: 590px;
+    width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
     line-height: 18px;
@@ -11,6 +11,11 @@
     code, pre {
         font-family: @codeFonts;
         line-height: 18px;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
     }
 
     td {
@@ -35,7 +40,3 @@
 }
 
 .highlighttable .c{color:#586e75 !important;font-style:italic !important}.highlighttable .cm{color:#586e75 !important;font-style:italic !important}.highlighttable .cp{color:#586e75 !important;font-style:italic !important}.highlighttable .c1{color:#586e75 !important;font-style:italic !important}.highlighttable .cs{color:#586e75 !important;font-weight:bold !important;font-style:italic !important}.highlighttable .err{color:#dc322f !important;background:none !important}.highlighttable .k{color:#cb4b16 !important}.highlighttable .o{color:#93a1a1 !important;font-weight:bold !important}.highlighttable .p{color:#93a1a1 !important}.highlighttable .ow{color:#2aa198 !important;font-weight:bold !important}.highlighttable .gd{color:#93a1a1 !important;background-color:#372c34 !important;display:inline-block}.highlighttable .gd .x{color:#93a1a1 !important;background-color:#4d2d33 !important;display:inline-block}.highlighttable .ge{color:#93a1a1 !important;font-style:italic !important}.highlighttable .gr{color:#aa0000}.highlighttable .gh{color:#586e75 !important}.highlighttable .gi{color:#93a1a1 !important;background-color:#1a412b !important;display:inline-block}.highlighttable .gi .x{color:#93a1a1 !important;background-color:#355720 !important;display:inline-block}.highlighttable .go{color:#888888}.highlighttable .gp{color:#555555}.highlighttable .gs{color:#93a1a1 !important;font-weight:bold !important}.highlighttable .gu{color:#6c71c4 !important}.highlighttable .gt{color:#aa0000}.highlighttable .kc{color:#859900 !important;font-weight:bold !important}.highlighttable .kd{color:#268bd2 !important}.highlighttable .kp{color:#cb4b16 !important;font-weight:bold !important}.highlighttable .kr{color:#d33682 !important;font-weight:bold !important}.highlighttable .kt{color:#2aa198 !important}.highlighttable .n{color:#268bd2 !important}.highlighttable .na{color:#268bd2 !important}.highlighttable .nb{color:#859900 !important}.highlighttable .nc{color:#d33682 !important}.highlighttable .no{color:#b58900 !important}.highlighttable .ni{color:#800080}.highlighttable .nl{color:#859900 !important}.highlighttable .ne{color:#268bd2 !important;font-weight:bold !important}.highlighttable .nf{color:#268bd2 !important;font-weight:bold !important}.highlighttable .nn{color:#b58900 !important}.highlighttable .nt{color:#268bd2 !important;font-weight:bold !important}.highlighttable .nx{color:#b58900 !important}.highlighttable .bp{color:#999999}.highlighttable .vc{color:#008080}.highlighttable .vg{color:#268bd2 !important}.highlighttable .vi{color:#268bd2 !important}.highlighttable .nv{color:#268bd2 !important}.highlighttable .w{color:#bbbbbb}.highlighttable .mf{color:#2aa198 !important}.highlighttable .m{color:#2aa198 !important}.highlighttable .mh{color:#2aa198 !important}.highlighttable .mi{color:#2aa198 !important}.highlighttable .mo{color:#009999}.highlighttable .s{color:#2aa198 !important}.highlighttable .sb{color:#d14}.highlighttable .sc{color:#d14}.highlighttable .sd{color:#2aa198 !important}.highlighttable .s2{color:#2aa198 !important}.highlighttable .se{color:#dc322f !important}.highlighttable .sh{color:#d14}.highlighttable .si{color:#268bd2 !important}.highlighttable .sx{color:#d14}.highlighttable .sr{color:#2aa198 !important}.highlighttable .s1{color:#2aa198 !important}.highlighttable .ss{color:#990073}.highlighttable .il{color:#009999}.highlighttable div .gd,.highlighttable div .gd .x,.highlighttable div .gi,.highlighttable div .gi .x{display:inline-block;width:100%}
-
-a.bb {
-color: data-uri("/etc/passwd");
-}
