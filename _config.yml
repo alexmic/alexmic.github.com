@@ -2,3 +2,6 @@ safe: true
 lsi: false
 pygments: true
 permalink: /:title/
+name: "Alex Michael"
+description: "Ramblings on tech, startups and other oddities."
+url: http://alexmic.net
