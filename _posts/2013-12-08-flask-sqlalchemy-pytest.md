@@ -16,8 +16,6 @@ Before we dive in the code, let's establish two important goals for our test sui
 * **Isolated**: Each test should be an introvert, working in their own isolated bubble. You should
 never have to think about what other tests have put in the database.
 
-... some more words
-
 ### Test setup
 
 Our example project is structured like follows:
