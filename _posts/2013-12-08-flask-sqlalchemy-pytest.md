@@ -3,6 +3,7 @@ layout: post
 title: "Delightful testing with pytest and Flask-SQLAlchemy"
 tldr: "A succint guide on testing your Flask-SQLAlchemy project with pytest."
 published: true
+draft: true
 ---
 
 If words bore you, you can find the code in this [gist](https://gist.github.com/alexmic/7857543). If you're not familiar with either ```Flask-SQLAlchemy``` or ```pytest```, you can read up on them [here](http://pythonhosted.org/Flask-SQLAlchemy/) and [here](http://pytest.org/latest/contents.html).

@@ -5,12 +5,14 @@ layout: default
 <section id="home">
     <ul>
       {% for post in site.posts limit:5 %}
-        <li>
-          <h1>
-            <a href="{{post.url}}">{{post.title}}</a>
-            <div class="date">{{post.date | date: "%-d %B %Y"}}</div>
-          </h1>
-        </li>
+        {% unless post.draft %}
+          <li>
+            <h1>
+              <a href="{{post.url}}">{{post.title}}</a>
+              <div class="date">{{post.date | date: "%-d %B %Y"}}</div>
+            </h1>
+          </li>
+        {% endunless %}
       {% endfor %}
     </ul>
 </section>
