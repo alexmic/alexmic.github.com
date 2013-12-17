@@ -3,7 +3,6 @@ layout: post
 title: "Delightful testing with pytest and Flask-SQLAlchemy"
 tldr: "A succint guide on testing your Flask-SQLAlchemy project with pytest."
 published: true
-draft: true
 ---
 
 If words bore you, you can find the code in this [gist](https://gist.github.com/alexmic/7857543). If you're not familiar with either ```Flask-SQLAlchemy``` or ```pytest```, you can read up on them [here](http://pythonhosted.org/Flask-SQLAlchemy/) and [here](http://pytest.org/latest/contents.html).
@@ -168,3 +167,5 @@ All we have to do then is replace the ```create_all()``` method call in the ```d
 ### Caveats
 
 The current version of ```Flask-SQLAlchemy``` on ```PyPI``` (1.0) is outdated so I am using the latest master from Github (2.0-dev). However, the ```SignallingSession``` in ```Flask-SQLAlchemy``` breaks the example at [Joining a Session into an External Transaction](http://docs.sqlalchemy.org/en/latest/orm/session.html#joining-a-session-into-an-external-transaction) so I had to subclass ```SignallingSession``` to make it work. The code for this is included in the [gist](https://gist.github.com/alexmic/7857543) as well.
+
+Thanks to Jocke Ekberg, Faethon Milikouris, George Eracleous and Alex Loizou for reviewing.
