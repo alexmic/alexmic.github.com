@@ -102,6 +102,8 @@ def session(db, request):
     options = dict(bind=connection, binds={})
     session = db.create_scoped_session(options=options)
 
+    db.session = session
+
     def teardown():
         transaction.rollback()
         connection.close()
