@@ -18,6 +18,7 @@
   </head>
   <body>
     <div class="container">
+      {% unless page.chromeless %}
       <header>
         <a href="/" class="face">&nbsp;</a>
         <h1><a href="/">Alex Michael</a></h1>
@@ -30,6 +31,7 @@
         </nav>
         <p class="chasm">&nbsp;</p>
       </header>
+      {% endunless %}
       {{content}}
       <script type="text/javascript">
         var _gaq = _gaq || [];
