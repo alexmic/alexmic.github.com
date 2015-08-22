@@ -5,7 +5,6 @@ tldr: "A talk given at Insights Conference 2015"
 published: true
 ---
 
-My slides for my talk on how the internet and the web works at Insights Conference 2015
-in Cyprus. The audience was semi-technical so I simplified a lot of technical concepts.
+My slides for my talk on how the internet and the web works at <a href="http://insightscon.com/" target="_blank">Insights Conference 2015</a> in Cyprus. The audience was semi-technical so I simplified a lot of technical concepts.
 
 <iframe src="//slides.com/alexmic/deck/embed?style=dark" width="100%" height="425" scrolling="no" frameborder="0" allowfullscreen="true"> </iframe>
